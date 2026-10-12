@@ -2828,7 +2828,7 @@
             width: 60px;
         }
         .logo-img-home {
-            background-color: #4400ff;
+            background-color: #ff7300;
             height: 230px;
             padding: 30px 60px;
             border-radius: 24px;
@@ -2871,6 +2871,608 @@
 <body class="">
 
 
+<!-- ================= HALLOWEEN MAINTENANCE POPUP ================= -->
+<style>
+  /* Prevent the website underneath from scrolling while popup is open */
+  body.halloween-lock {
+    overflow: hidden;
+  }
+
+  #halloween-maintenance {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    background:
+      radial-gradient(circle at 50% 45%, rgba(255, 90, 0, 0.18), transparent 35%),
+      radial-gradient(circle at 20% 20%, rgba(255, 145, 0, 0.12), transparent 30%),
+      #070707;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity 0.8s ease,
+      visibility 0.8s ease;
+  }
+
+  #halloween-maintenance.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* ================= LIQUID BACKGROUND ================= */
+
+  .halloween-liquid {
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+    filter: blur(45px);
+    opacity: 0.8;
+  }
+
+  .liquid-blob {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    animation: liquidMove 12s ease-in-out infinite alternate;
+  }
+
+  .blob-one {
+    width: 480px;
+    height: 480px;
+    left: 8%;
+    top: 5%;
+
+    background:
+      radial-gradient(
+        circle at 35% 35%,
+        rgba(255, 155, 0, 0.8),
+        rgba(255, 65, 0, 0.25) 45%,
+        transparent 70%
+      );
+  }
+
+  .blob-two {
+    width: 600px;
+    height: 600px;
+    right: 5%;
+    bottom: -10%;
+
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 80, 0, 0.55),
+        rgba(120, 20, 0, 0.2) 45%,
+        transparent 70%
+      );
+
+    animation-delay: -4s;
+  }
+
+  .blob-three {
+    width: 350px;
+    height: 350px;
+    left: 45%;
+    top: 35%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(255, 190, 70, 0.3),
+        transparent 70%
+      );
+
+    animation-delay: -7s;
+  }
+
+  @keyframes liquidMove {
+    0% {
+      transform: translate3d(-30px, -20px, 0) scale(1);
+    }
+
+    50% {
+      transform: translate3d(80px, 40px, 0) scale(1.15);
+    }
+
+    100% {
+      transform: translate3d(-50px, 80px, 0) scale(0.9);
+    }
+  }
+
+  /* ================= GLASS CARD ================= */
+
+  .halloween-glass {
+    position: relative;
+    z-index: 10;
+
+    width: min(720px, calc(100% - 40px));
+    padding: 50px 45px;
+
+    text-align: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 32px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.035)
+      );
+
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+
+    box-shadow:
+      0 30px 100px rgba(0, 0, 0, 0.75),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2),
+      0 0 80px rgba(255, 75, 0, 0.12);
+
+    animation: cardFloat 6s ease-in-out infinite;
+  }
+
+  @keyframes cardFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-7px);
+    }
+  }
+
+  /* Glass shine */
+  .halloween-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        120deg,
+        rgba(255,255,255,0.12),
+        transparent 30%,
+        transparent 70%,
+        rgba(255,120,0,0.06)
+      );
+
+    pointer-events: none;
+  }
+
+  /* ================= PUMPKIN ================= */
+
+  .pumpkin {
+    position: relative;
+    width: 82px;
+    height: 70px;
+    margin: 0 auto 20px;
+
+    border-radius: 45% 45% 48% 48%;
+
+    background:
+      radial-gradient(
+        ellipse at 35% 30%,
+        #ffb52e,
+        #ff6800 45%,
+        #bd2600 100%
+      );
+
+    box-shadow:
+      0 0 30px rgba(255, 90, 0, 0.55),
+      inset -8px -5px 15px rgba(80, 15, 0, 0.3),
+      inset 8px 5px 15px rgba(255, 200, 80, 0.2);
+
+    animation: pumpkinGlow 2.5s ease-in-out infinite alternate;
+  }
+
+  .pumpkin::before,
+  .pumpkin::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    width: 28px;
+    height: 60px;
+
+    border: 3px solid rgba(120, 25, 0, 0.35);
+    border-top: 0;
+    border-bottom: 0;
+    border-radius: 50%;
+  }
+
+  .pumpkin::before {
+    left: 25px;
+  }
+
+  .pumpkin::after {
+    left: 40px;
+  }
+
+  .pumpkin-stem {
+    position: absolute;
+    top: -14px;
+    left: 36px;
+
+    width: 12px;
+    height: 20px;
+
+    border-radius: 5px 5px 2px 2px;
+    background: #382510;
+    transform: rotate(8deg);
+  }
+
+  @keyframes pumpkinGlow {
+    from {
+      filter: brightness(1);
+    }
+
+    to {
+      filter: brightness(1.15);
+    }
+  }
+
+  /* ================= TEXT ================= */
+
+  .halloween-eyebrow {
+    position: relative;
+    margin-bottom: 12px;
+
+    color: #ff8a00;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .halloween-title {
+    position: relative;
+    margin: 0;
+
+    color: white;
+
+    font-size: clamp(36px, 7vw, 62px);
+    line-height: 0.95;
+    font-weight: 900;
+    letter-spacing: -2px;
+
+    text-shadow:
+      0 0 25px rgba(255, 90, 0, 0.25);
+  }
+
+  .halloween-title span {
+    color: #ff7100;
+
+    text-shadow:
+      0 0 15px rgba(255, 90, 0, 0.5),
+      0 0 40px rgba(255, 70, 0, 0.2);
+  }
+
+  .halloween-message {
+    position: relative;
+
+    max-width: 560px;
+    margin: 22px auto 0;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .halloween-message strong {
+    color: white;
+  }
+
+  /* ================= COUNTDOWN ================= */
+
+  .countdown {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    margin: 30px auto 28px;
+  }
+
+  .countdown-box {
+    min-width: 72px;
+    padding: 13px 10px;
+
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+      inset 0 1px rgba(255,255,255,0.08);
+  }
+
+  .countdown-number {
+    display: block;
+
+    color: white;
+
+    font-size: 25px;
+    font-weight: 800;
+  }
+
+  .countdown-label {
+    display: block;
+
+    margin-top: 3px;
+
+    color: rgba(255,255,255,0.4);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ================= BUTTON ================= */
+
+  .enter-button {
+    position: relative;
+
+    padding: 14px 27px;
+
+    border: 1px solid rgba(255, 150, 50, 0.35);
+    border-radius: 14px;
+
+    color: white;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 120, 0, 0.25),
+        rgba(255, 60, 0, 0.08)
+      );
+
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+      transform 0.25s ease,
+      background 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .enter-button:hover {
+    transform: translateY(-3px);
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 120, 0, 0.45),
+        rgba(255, 60, 0, 0.15)
+      );
+
+    box-shadow:
+      0 10px 30px rgba(255, 70, 0, 0.2);
+  }
+
+  /* ================= PARTICLES ================= */
+
+  .halloween-particle {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: #ff8a00;
+
+    box-shadow:
+      0 0 12px #ff5c00;
+
+    opacity: 0.5;
+
+    animation: particleFloat linear infinite;
+  }
+
+  @keyframes particleFloat {
+    from {
+      transform: translateY(110vh) translateX(0);
+      opacity: 0;
+    }
+
+    20% {
+      opacity: 0.6;
+    }
+
+    80% {
+      opacity: 0.6;
+    }
+
+    to {
+      transform: translateY(-20vh) translateX(80px);
+      opacity: 0;
+    }
+  }
+
+  /* ================= MOBILE ================= */
+
+  @media (max-width: 600px) {
+    .halloween-glass {
+      padding: 38px 22px;
+      border-radius: 25px;
+    }
+
+    .countdown {
+      gap: 6px;
+    }
+
+    .countdown-box {
+      min-width: 58px;
+      padding: 11px 6px;
+    }
+
+    .countdown-number {
+      font-size: 20px;
+    }
+
+    .halloween-message {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div id="halloween-maintenance">
+
+  <!-- Liquid background -->
+  <div class="halloween-liquid">
+    <div class="liquid-blob blob-one"></div>
+    <div class="liquid-blob blob-two"></div>
+    <div class="liquid-blob blob-three"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="halloween-particle" style="left:8%; animation-duration:11s;"></div>
+  <div class="halloween-particle" style="left:18%; animation-duration:15s; animation-delay:-4s;"></div>
+  <div class="halloween-particle" style="left:31%; animation-duration:13s; animation-delay:-8s;"></div>
+  <div class="halloween-particle" style="left:47%; animation-duration:17s; animation-delay:-2s;"></div>
+  <div class="halloween-particle" style="left:61%; animation-duration:12s; animation-delay:-6s;"></div>
+  <div class="halloween-particle" style="left:74%; animation-duration:16s; animation-delay:-10s;"></div>
+  <div class="halloween-particle" style="left:88%; animation-duration:14s; animation-delay:-3s;"></div>
+
+  <!-- Main glass popup -->
+  <div class="halloween-glass">
+
+    <div class="pumpkin">
+      <div class="pumpkin-stem"></div>
+    </div>
+
+    <div class="halloween-eyebrow">
+      🎃 AEROME SMP • HALLOWEEN UPDATE
+    </div>
+
+    <h1 class="halloween-title">
+      Something spooky<br>
+      <span>is brewing...</span>
+    </h1>
+
+    <p class="halloween-message">
+      The <strong>Aerome SMP</strong> is currently undergoing
+      some mysterious maintenance while we prepare our
+      <strong>Halloween update.</strong>
+      <br><br>
+      We'll be back online on
+      <strong>25 October 2026</strong>.
+    </p>
+
+    <div class="countdown">
+      <div class="countdown-box">
+        <span class="countdown-number" id="days">00</span>
+        <span class="countdown-label">Days</span>
+      </div>
+
+      <div class="countdown-box">
+        <span class="countdown-number" id="hours">00</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+
+      <div class="countdown-box">
+        <span class="countdown-number" id="minutes">00</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+
+      <div class="countdown-box">
+        <span class="countdown-number" id="seconds">00</span>
+        <span class="countdown-label">Seconds</span>
+      </div>
+    </div>
+
+    <button class="enter-button" onclick="closeHalloweenPopup()">
+      ENTER AEROMESMP WEBSITE
+    </button>
+
+  </div>
+</div>
+
+
+<script>
+  /* ================= HALLOWEEN COUNTDOWN ================= */
+
+  const halloweenDate = new Date("October 25, 2026 00:00:00").getTime();
+
+  function updateHalloweenCountdown() {
+
+    const now = new Date().getTime();
+    const distance = halloweenDate - now;
+
+    if (distance <= 0) {
+      document.getElementById("days").textContent = "00";
+      document.getElementById("hours").textContent = "00";
+      document.getElementById("minutes").textContent = "00";
+      document.getElementById("seconds").textContent = "00";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) /
+      (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+      (distance % (1000 * 60 * 60)) /
+      (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+      (distance % (1000 * 60)) /
+      1000
+    );
+
+    document.getElementById("days").textContent =
+      String(days).padStart(2, "0");
+
+    document.getElementById("hours").textContent =
+      String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").textContent =
+      String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+      String(seconds).padStart(2, "0");
+  }
+
+  updateHalloweenCountdown();
+
+  setInterval(updateHalloweenCountdown, 1000);
+
+
+  /* ================= CLOSE POPUP ================= */
+
+  function closeHalloweenPopup() {
+    const popup = document.getElementById("halloween-maintenance");
+
+    popup.classList.add("hide");
+    document.body.classList.remove("halloween-lock");
+
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 800);
+  }
+
+
+  /* ================= LOCK PAGE ON LOAD ================= */
+
+  document.body.classList.add("halloween-lock");
+</script>
+<!-- ================= END HALLOWEEN MAINTENANCE POPUP ================= -->
 
 
 <div class="page-wrapper">
@@ -2897,7 +3499,7 @@
                                 <i class="mdi mdi-content-copy mdi-36px" style="transform: scaleX(-1)"></i>
                                 AeromeSMP.xyz <div class="ip-players">0</div>
                                 <div class="custom-tooltip absolute group-hover:show">
-        							<span>Copy to clipboard</span>
+        							<span>Copy to clipboard</span>wwwww
         							<span class="tooltip-pointer absolute"></span>
         						</div>
                             </div>
